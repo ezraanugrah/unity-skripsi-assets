@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import StoryboardNotes from "./storyboard-notes";
 import { useEffect, useRef, useState } from "react";
 import { character, imagePath, slides, storyboards, type Storyboard } from "@/lib/storyboards";
 import { isStatus, parseStatuses, statusLabels, STORAGE_KEY, type Status, type StatusMap } from "@/lib/storyboard-status";
@@ -23,13 +24,16 @@ function Preview({ initialId, statuses, onChange, onClose, ready }: { initialId:
     return () => { node?.close(); document.body.style.overflow = overflow; opener?.focus(); };
   }, []);
   return <dialog ref={dialog} className="preview" aria-labelledby="preview-title" onCancel={event => { event.preventDefault(); onClose(); }} onKeyDown={event => {
-    if ((event.target as HTMLElement).closest("select")) return;
+    if ((event.target as HTMLElement).closest("select, textarea, input, [contenteditable='true']")) return;
     if (event.key === "ArrowLeft") { event.preventDefault(); setIndex(value => Math.max(0, value - 1)); }
     if (event.key === "ArrowRight") { event.preventDefault(); setIndex(value => Math.min(storyboards.length - 1, value + 1)); }
   }}>
     <div className="preview-shell">
       <header className="preview-header"><div><p className="eyebrow">{item.kind === "slide" ? "STORYBOARD" : "REFERENSI KARAKTER"}</p><h2 id="preview-title">{item.title}</h2></div><button autoFocus className="close-button" onClick={onClose} aria-label="Tutup pratinjau">✕ <span>Tutup</span></button></header>
-      <div className="preview-image"><Image key={item.id} src={imagePath(item)} alt={`Pratinjau ${item.title}`} fill sizes="100vw" quality={90} priority style={{ objectFit: "contain" }} /></div>
+      <div className="preview-content">
+        <div className="preview-image"><Image key={item.id} src={imagePath(item)} alt={`Pratinjau ${item.title}`} fill sizes="100vw" quality={90} priority style={{ objectFit: "contain" }} /></div>
+        {item.kind === "slide" && <StoryboardNotes key={item.id} slideId={item.id} />}
+      </div>
       <footer className="preview-footer"><div><p className="file-label">{item.filename}</p>{item.kind === "slide" ? <StatusSelect item={item} value={statuses[item.id] ?? "todo"} onChange={onChange} disabled={!ready} /> : <span className="reference-tag">Referensi · tidak dihitung dalam progres</span>}</div><nav className="preview-nav" aria-label="Navigasi pratinjau"><button className="nav-button" disabled={index === 0} onClick={() => setIndex(index - 1)} aria-label="Gambar sebelumnya">←</button><span aria-live="polite">{index + 1} / {storyboards.length}</span><button className="nav-button" disabled={index === storyboards.length - 1} onClick={() => setIndex(index + 1)} aria-label="Gambar berikutnya">→</button></nav><p className="keyboard-hint">← → Navigasi <span>·</span> Esc Tutup</p></footer>
     </div>
   </dialog>;
