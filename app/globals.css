@@ -63,3 +63,50 @@ progress::-webkit-progress-bar { background: #ecf0ed; } progress::-webkit-progre
   .unity-notes { width: 100%; flex-shrink: 0; overflow-y: visible; border-left: 0; border-top: 1px solid #ffffff18; padding: 18px; }
   .unity-notes textarea { font-size: 16px; min-height: 130px; }
 }
+
+/* Unity monitoring extends the existing workspace without restyling the gallery. */
+.progress-workspace { padding-bottom: 50px; }
+.progress-intro { padding: 48px 0 28px; }
+.progress-intro h1 { font-size: clamp(28px, 3.3vw, 42px); }
+.progress-intro > p:not(.eyebrow) { color: var(--muted); line-height: 1.8; }
+.progress-intro .progress-storage { font-size: 12px; max-width: 760px; }
+.scene-overview { display: grid; grid-template-columns: 1.2fr repeat(4, 1fr); background: white; border: 1px solid var(--line); border-radius: 12px; padding: 24px; gap: 24px; }
+.scene-total { display: flex; flex-direction: column; gap: 5px; }
+.scene-total strong, .scene-stat strong { font-size: 28px; font-weight: 500; }
+.scene-total small { font-size: 15px; color: var(--muted); }
+.scene-total > span, .scene-stat > span { font-size: 11px; color: var(--muted); }
+.scene-stat { display: flex; flex-direction: column; gap: 18px; border-left: 1px solid var(--line); padding-left: 20px; }
+.progress-feedback { color: var(--accent); font-size: 12px; min-height: 20px; line-height: 1.7; }
+.progress-error { color: #916024; }
+.scene-layout { display: grid; grid-template-columns: 265px minmax(0, 1fr); gap: 25px; margin-top: 24px; align-items: start; }
+.scene-list { display: flex; flex-direction: column; gap: 8px; }
+.scene-list button { display: flex; text-align: left; gap: 12px; align-items: center; padding: 16px; background: white; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); }
+.scene-list button[aria-pressed="true"] { border-color: #7c9a87; background: #edf2ee; }
+.scene-list strong { display: block; font-size: 13px; line-height: 1.5; font-weight: 600; }
+.scene-list small { display: block; color: var(--muted); font-size: 10px; margin-top: 5px; }
+.scene-number { font-size: 12px; color: var(--accent); background: #f3f6f3; border: 1px solid #dfe6df; padding: 8px; border-radius: 6px; }
+.scene-detail { padding: 28px; background: white; border: 1px solid var(--line); border-radius: 12px; min-width: 0; }
+.scene-detail-heading { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 24px; }
+.scene-detail-heading .eyebrow { margin-bottom: 10px; }
+.scene-fields { border: 0; padding: 0; margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+.scene-fields label { display: flex; flex-direction: column; gap: 9px; font-size: 12px; font-weight: 600; }
+.scene-fields input:not([type="checkbox"]), .scene-fields textarea, .scene-fields select { width: 100%; min-width: 0; background: #fafbfc; border: 1px solid #dfe5e9; border-radius: 6px; padding: 11px; color: var(--ink); font: inherit; font-weight: 400; line-height: 1.6; }
+.scene-fields textarea { resize: vertical; }
+.scene-fields button { border: 1px solid #d8e1d9; background: #f3f6f3; color: var(--accent); border-radius: 6px; padding: 9px 12px; font-size: 11px; }
+.scene-evidence { background: #fff8e9; border: 1px solid #eddcb5; padding: 13px; border-radius: 6px; color: #87632c; font-size: 12px; line-height: 1.8; margin: 0; }
+.scene-block { border-top: 1px solid var(--line); padding-top: 22px; min-width: 0; }
+.scene-block h3 { margin: 0 0 8px; font-size: 15px; font-weight: 600; }
+.scene-block > p { color: var(--muted); font-size: 11px; line-height: 1.8; margin: 0 0 14px; }
+.checklist-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+.checklist-row input[type="checkbox"] { width: 17px; height: 17px; accent-color: var(--accent); flex-shrink: 0; }
+.checklist-row button { font-size: 18px; padding: 5px 10px; }
+.script-editor { border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin: 16px 0; min-width: 0; }
+.script-editor legend { font-size: 11px; color: var(--muted); padding: 0 7px; }
+.script-editor label { margin-bottom: 15px; }
+.script-editor .source-editor { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 12px; white-space: pre; overflow-x: auto; }
+.progress-actions, .storyboard-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.storyboard-links a { padding: 8px 10px; margin-top: 12px; background: #edf2ee; color: var(--accent); border-radius: 5px; font-size: 11px; }
+.story-card[id] { scroll-margin-top: 20px; }
+.story-card:target { outline: 3px solid #8caea0; outline-offset: 3px; }
+@media (max-width: 1023px) { .scene-overview { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; } .scene-total { grid-column: 1/-1; } .scene-stat { border-left: 0; padding-left: 0; } .scene-layout { grid-template-columns: 210px minmax(0,1fr); gap: 16px; } .scene-detail { padding: 20px; } }
+@media (max-width: 639px) { .progress-intro { padding-top: 30px; } .scene-layout { display: block; } .scene-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); margin-bottom: 20px; } .scene-list button { padding: 10px; gap: 8px; min-width: 0; } .scene-list strong { font-size: 11px; } .scene-number { padding: 5px; font-size: 10px; } .scene-list small { font-size: 9px; } .scene-detail { padding: 17px; } .scene-fields input:not([type="checkbox"]), .scene-fields textarea, .scene-fields select { font-size: 16px; } .scene-detail-heading { align-items: flex-start; flex-direction: column; } }
