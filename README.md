@@ -42,6 +42,19 @@ Laporan HTML tersedia di `playwright-report/index.html` dan dapat dibuka dengan
 `npx playwright show-report`. Screenshot dan trace disimpan di `test-results/`
 hanya saat gagal. Semua direktori hasil pengujian diabaikan oleh Git.
 
+## GitHub Actions CI
+
+Workflow `.github/workflows/ci.yml` berjalan untuk Pull Request menuju `main`
+dan push ke `main`. Runner Ubuntu menggunakan Node.js 22 LTS, cache npm, dan
+`npm ci`, kemudian menjalankan lint, typecheck, build, instalasi Chromium beserta
+dependensi sistemnya, lalu `npm run test` (alias untuk `test:e2e`).
+
+Playwright menggunakan server hasil build lokal pada `127.0.0.1:3100`, tanpa
+secrets, database, atau API production. Job dibatasi 20 menit dan langkah test
+8 menit; run lama untuk PR/ref yang sama dibatalkan saat run baru dimulai.
+Laporan HTML, screenshot, dan trace diunggah sebagai artifact selama 7 hari
+hanya jika langkah Playwright gagal. Workflow hanya meminta `contents: read`.
+
 ## Penggunaan
 
 - Klik gambar untuk membuka pratinjau layar penuh.
