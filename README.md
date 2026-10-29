@@ -69,3 +69,32 @@ Seluruh gambar asli di `public/storyboards/` dipertahankan. Manifest `lib/storyb
 Status disimpan dalam localStorage pada key `unity-storyboard-status:v1`, menggunakan ID stabil (`slide-2` sampai `slide-20`). Data hanya berlaku pada browser dan origin yang sama, tidak disinkronkan antarperangkat. Menghapus data browser menghapus progres. Jika penyimpanan gagal, perubahan tetap berlaku dalam sesi dan aplikasi menampilkan pemberitahuan. Tab pada origin yang sama menerima pembaruan melalui storage event.
 
 Tidak ada backend, akun pengguna, atau database. Struktur siap untuk GitHub/Vercel di tahap mendatang; tidak ada push atau deployment yang dilakukan saat implementasi.
+
+## Progres Implementasi Unity
+
+Buka `/unity-progress` melalui tautan **Progres Unity** di halaman utama.
+Tujuh scene memiliki status, deskripsi interaksi, checklist yang dapat diedit,
+catatan teknis, riwayat masalah/solusi, bukti verifikasi, serta daftar script C#.
+Source C# dapat ditempel, diedit dan disalin; tidak dikompilasi atau dijalankan.
+Perubahan disimpan otomatis dengan key `unity-implementation-progress:v1`,
+terpisah dari status dan catatan storyboard. Data hanya tersedia pada browser
+serta origin/perangkat tersebut, belum sinkron antarperangkat. Source yang besar
+bisa mencapai batas kapasitas localStorage; kegagalan simpan ditampilkan dan draf
+perlu disalin sebelum meninggalkan halaman.
+
+Scene memiliki ID tetap `scene-1` sampai `scene-7`. Pilih storyboard terkait untuk
+menautkan ke kartu galeri berdasarkan `slide-2` sampai `slide-20`. Pemetaan awal
+sengaja kosong karena hubungan gambar ke scene belum dikonfirmasi.
+
+Scene 7 diisi dari riwayat yang diberikan: drag-and-drop tiga aktivitas, nama dua
+script, perbaikan CS0136/CS0128 yang pernah dicatat, ukuran ilustrasi yang sudah
+dikonfirmasi, dan posisi akhir drop yang masih perlu diuji. Offset Y = -8 tetap
+berstatus saran. Source aslinya belum diberikan sehingga kolom source kosong.
+Scene lain dimulai sebagai Belum Dimulai tanpa hasil pengujian rekaan.
+
+Progres ringkasan menghitung status scene yang dipilih pengguna; checklist tidak
+mengubah status scene secara otomatis. Kolom bukti pengujian tersedia dan
+peringatan muncul jika status terverifikasi dipilih tanpa bukti. Dashboard tidak
+memverifikasi aplikasi Unity secara otomatis. Parser memvalidasi tipe status,
+catatan, checklist, script, dan ID storyboard. Data rusak tidak ditimpa; perubahan
+saat penyimpanan tidak tersedia hanya berupa draf sesi.
