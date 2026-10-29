@@ -19,6 +19,29 @@ npm run typecheck
 npm run build
 ```
 
+## Pengujian E2E lokal (Chromium)
+
+```sh
+npm ci
+npx playwright install chromium
+npm run build
+npm run test:e2e
+```
+
+Playwright otomatis menjalankan dan menghentikan server hasil build di
+`http://127.0.0.1:3100`. Port tersebut harus kosong; server yang sudah berjalan
+tidak digunakan ulang. Jalankan build lagi setelah mengubah aplikasi.
+Pengujian tidak memakai website production atau data pribadi.
+
+Setiap test mendapat browser context dan localStorage baru. Cakupan pengujian:
+halaman utama, 19 slide dan referensi karakter, preview dan gambar, navigasi
+tombol/keyboard, pengeditan dan persistensi catatan, pemisahan catatan antar-slide,
+serta overflow pada viewport 320, 390, dan 768 px.
+
+Laporan HTML tersedia di `playwright-report/index.html` dan dapat dibuka dengan
+`npx playwright show-report`. Screenshot dan trace disimpan di `test-results/`
+hanya saat gagal. Semua direktori hasil pengujian diabaikan oleh Git.
+
 ## Penggunaan
 
 - Klik gambar untuk membuka pratinjau layar penuh.
